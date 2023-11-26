@@ -1,7 +1,13 @@
-const clc = require("cli-color");
+const figlet = require("figlet");
 
-function outputMessage(message) {
-  console.log(clc.purple(`My name is ${message}`));
-}
+const textToArt = "Hi guys";
 
-outputMessage("Miriana");
+figlet(textToArt, function (err, data) {
+  if (err) {
+    console.log("Somenthing went wrong...");
+    console.dir(err);
+    return;
+  }
+
+  console.log(data);
+});
