@@ -2,7 +2,6 @@ import express from "express";
 import "express-async-errors";
 import dotenv from "dotenv";
 import morgan from "morgan";
-
 import {
   getAll,
   getOneById,
@@ -11,8 +10,10 @@ import {
   deleteById,
   createImage,
 } from "./controllers/planets.js";
-import { logIn, signUp } from "./controllers/users.js";
+import { logIn, signUp, logOut } from "./controllers/users.js";
+import authorize from "./authorize.js";
 import multer from "multer";
+import "./passport.js";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -55,6 +56,9 @@ app.post("/api/users/login", logIn);
 
 //SIGNUP
 app.post("/api/users/signup", signUp);
+
+//LOGOUT
+app.get("/api/users/logout", authorize, logOut);
 
 app.listen(port, () => {
   console.log(`Server is running on port http://localhost:${port}`);
