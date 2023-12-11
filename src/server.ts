@@ -11,6 +11,7 @@ import {
   deleteById,
   createImage,
 } from "./controllers/planets.js";
+import { logIn, signUp } from "./controllers/users.js";
 import multer from "multer";
 
 const storage = multer.diskStorage({
@@ -48,6 +49,12 @@ app.delete("/api/planets/:id", deleteById);
 
 //UPLOAD IMAGE
 app.post("/api/planets/:id/image", upload.single("image"), createImage);
+
+//LOGIN
+app.post("/api/users/login", logIn);
+
+//SIGNUP
+app.post("/api/users/signup", signUp);
 
 app.listen(port, () => {
   console.log(`Server is running on port http://localhost:${port}`);
